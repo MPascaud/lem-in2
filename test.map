@@ -1,0 +1,44 @@
+40
+A2 0 0
+A3 0 0
+##end
+c'est la fin 0 0
+B2 0 0
+B4 0 0
+paume 2 0 0
+C1 0 0
+avant 0 0
+##start
+c'est le debut 0 0
+C2 0 0
+D3 0 0
+A1 0 0
+E2 0 0
+D1 0 0
+C3 0 0
+#sans commentaire
+C4 0 0
+D2 0 0
+B1 0 0
+E1 0 0
+paume 1 0 0
+B3 0 0
+paume 3 0 0
+start-avant
+start-A1
+A1-A2
+A2-A3
+start-B1
+start-D1
+B1-B2
+B2-B3
+B3-B4
+C4-C1
+C1-B4
+C2-C3
+D1-D2
+D2-B3
+D2-D3
+D2-E1
+E1-E2
+D3-E2

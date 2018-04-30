@@ -1,0 +1,45 @@
+50
+##start
+c'est le debut 0 0
+B1 0 0
+##end
+c'est la fin 0 0
+A1 0 0
+A2 0 0
+A3 0 0
+B2 0 0
+B3 0 0
+B4 0 0
+C1 0 0
+C4 0 0
+C2 0 0
+C3 0 0
+D1 0 0
+D2 0 0
+D3 0 0
+E1 0 0
+E2 0 0
+paume 1 0 0
+paume 2 0 0
+paume 3 0 0
+c'est le debut-A1
+A3-A2
+A2-A1
+c'est le debut-B1
+B2-B1
+B2-B3
+B3-B4
+c'est la fin-B4
+B4-C1
+C1-C4
+c'est la fin-C2
+C3-C2
+c'est le debut-D1
+D1-D2
+D2-D3
+D3-c'est la fin
+D2-B3
+D2-E1
+E1-E2
+E2-D3
+paume 1-paume 2
