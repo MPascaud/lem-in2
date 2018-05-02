@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/04/30 22:15:38 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:47:59 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1260,10 +1260,12 @@ void	ft_show_listlist(t_listlist *listlist)
 	}
 }
 
-void	ft_free(t_filist *filistart, t_roomlist *roomlist)
+void	ft_free(t_filist *filistart, t_roomlist *roomlist, t_listlist *listlist)
 {
 	t_filist	*tmp;
 	t_roomlist	*roomlistmp;
+	t_listlist	*listlistmp;
+	t_waylist	*waylistmp;
 	int			i;
 
 	i = 0;
@@ -1273,22 +1275,17 @@ void	ft_free(t_filist *filistart, t_roomlist *roomlist)
 		tmp = filistart->next;
 		free(filistart->line);
 		free(filistart);
-		//printf("filistart->line = %s\n", filistart->line);
 		filistart = tmp;
 	}
-//	roomlistmp = roomlist;
-//	roomlist = roomlist->next;
-//	printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
 	while (roomlistmp != NULL)
 	{
 		roomlistmp = roomlist->next;
 		free(roomlist->name);
-	//	printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
 		if (roomlist->beftunnels != NULL)
 		{
 			while ((roomlist->beftunnels)[i] != NULL)
 			{
-				printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
+				//printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
 				free((roomlist->beftunnels)[i]);
 				i++;
 			}
@@ -1310,6 +1307,24 @@ void	ft_free(t_filist *filistart, t_roomlist *roomlist)
 		i = 0;
 		free(roomlist);
 		roomlist = roomlistmp;
+	}
+
+
+	listlistmp = listlist;
+	while (listlistmp != NULL)
+	{
+		listlistmp = listlist->next;
+		while (listlist->waylist != NULL)
+		{
+			//printf("listlist->waylist->name = %s\n", listlist->waylist->name);
+			free(listlist->waylist->name);
+			waylistmp = listlist->waylist->next;
+			free(listlist->waylist);
+			listlist->waylist = waylistmp;
+		}
+		free(listlist->waylist);//<<<<---------------
+		free(listlist);
+		listlist = listlistmp;
 	}
 }
 
@@ -1372,8 +1387,6 @@ int		main(void)
 	ft_place_end(filistart, roomlist);
 	ft_tunnels(filistart, roomlist);
 	ft_place(filistart, roomlist);
-	ft_free(filistart, roomlistart);
-	while (1);
 	
 
 
@@ -1383,6 +1396,8 @@ int		main(void)
 		way++;
 	}
 	way--;
+
+//	while (1);
 
 	listlist = (t_listlist*)malloc(sizeof(t_listlist));
 	listlist->previous = NULL;
@@ -1404,6 +1419,7 @@ int		main(void)
 
 
 
+	ft_free(filistart, roomlistart, listlistart);
 
 
 
