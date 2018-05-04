@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:44:23 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/04/27 15:51:40 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/04 22:02:43 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ typedef struct	s_listlist
 	struct	s_listlist	*next;
 }				t_listlist;
 
+typedef struct	s_namelist
+{
+	char	*name;
+	struct s_namelist	*previous;
+	struct s_namelist	*next;
+}				t_namelist;
 
 #endif
 

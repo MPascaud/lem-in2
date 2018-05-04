@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/02 23:16:06 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/05 00:38:04 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1076,13 +1076,13 @@ int		ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, int
 			{
 				//	ft_show_roomlist(roomlistart);
 				ft_reset(roomlistart, way);
-				//		printf("RETURN 1111\n");
+				printf("RETURN 1111\n");
 				return (1);
 			}
 			else
 			{
 				//	ft_show_roomlist(roomlistart);
-				//		printf("RETURN 2222222\n");
+				printf("RETURN 2222222\n");
 				return (0);
 			}
 		}
@@ -1220,7 +1220,9 @@ void	ft_ants(t_listlist *listlist, t_filist *filistart)
 
 	tmp = listlist;
 	filistart = filistart->next;
-	tmp->ants = ft_atoi(filistart->line);
+	//printf("filistart = %s\n", filistart->line);
+	if (filistart != NULL)
+		tmp->ants = ft_atoi(filistart->line);
 	while (tmp != NULL)
 	{
 		waytmp = tmp->waylist;
@@ -1284,7 +1286,7 @@ void    ft_free(t_filist *filistart, t_roomlist *roomlist, t_listlist *listlist)
 		{
 			while ((roomlist->beftunnels)[i] != NULL)
 			{
-			//	printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
+		//		printf("beftunnels = %s\n", (roomlist->beftunnels)[i]);
 				free((roomlist->beftunnels)[i]);
 				i++;
 			}
@@ -1327,7 +1329,231 @@ void    ft_free(t_filist *filistart, t_roomlist *roomlist, t_listlist *listlist)
 	}
 }
 
-int		main(void)
+int		ft_at_least_one_room(char *tmp)
+{
+	int		result;
+	int		i;
+
+	result = 0;
+	i = 0;
+	if (tmp == NULL)
+		return (0);
+	while (tmp[i] != '\0')
+	{
+		i++;
+	}
+	i--;
+	//printf("i = %d\n", i);
+	while (ft_isdigit(tmp[i]) == 1)
+	{
+		i--;
+		if (i < 0)
+			return (0);
+	}
+	i--;
+	while (ft_isdigit(tmp[i]) == 1)
+	{
+		i--;
+		if (i < 0)
+			return (0);
+	}
+	//printf("i = %d\n", i);
+	if (tmp[i] == ' ' && tmp[0] != '#')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+t_namelist		*ft_new_name(char *tmp, t_namelist *namelist)
+{
+	t_namelist	*newlink;
+	char		*str;
+	int			i;
+	int			limit;
+
+
+	i = 0;
+	newlink = (t_namelist*)malloc(sizeof(t_namelist));
+	newlink->previous = namelist;
+	newlink->next = NULL;
+
+	while (tmp[i])
+		i++;
+	i--;
+	while (ft_isdigit(tmp[i]) == 1)
+		i--;
+	i--;
+	while (ft_isdigit(tmp[i]) == 1)
+		i--;
+	
+	limit = i;
+	i = 0;
+	newlink->name = ft_strnew(limit);
+	while (i < limit)
+	{
+		(newlink->name)[i] = tmp[i];
+		i++;
+	}
+
+	return (newlink);
+
+}
+
+int		ft_already(char	*name, t_namelist *namelistart)
+{
+	t_namelist	*namelist;
+
+	namelist = namelistart;
+	namelist = namelist->next;
+
+	while (namelist->next != NULL)
+	{
+		if (ft_strcmp(name, namelist->name) == 0)
+		{
+			return (1);
+		}
+		namelist = namelist->next;
+	}
+	return (0);
+}
+
+int		ft_not_yet(char *tmp, t_namelist *namelistart)
+{
+	t_namelist	*namelist;
+	int			i;
+	int			j;
+
+	namelist = namelistart;
+	namelist = namelist->next;
+	i = 0;
+	j = 0;
+	while (namelist != NULL)
+	{
+		while (tmp[i] != '-')
+		{
+			if (tmp[i] != (namelist->name)[i])
+			{
+				break ;
+			}
+			i++;
+		}
+		if (tmp[i] == '-')
+			return (0);
+		while (tmp[i] != '-')
+		{
+			i++;
+		}
+		i++;
+		while (tmp[i] != '\0')
+		{
+			if (tmp[i] != (namelist->name)[j])
+			{
+				break ;
+			}
+			i++;
+			j++;
+		}
+		if (tmp[i] == '\0')
+			return (0);
+		namelist = namelist->next;
+		i = 0;
+		j = 0;
+	}
+	return (1);
+}
+
+int		ft_valid_line(char *tmp, int check, t_namelist *namelistart)
+{
+	static int	step;
+	int			i;
+	t_namelist	*namelist;
+	int			tunnel;
+
+	i = 0;
+	tunnel = 0;
+
+	namelist = namelistart;
+/*	namelist = (t_namelist*)malloc(sizeof(t_namelist));
+	namelist->name = NULL;
+	namelist->previous = NULL;
+	namelist->next = NULL;*/
+	if (tmp != NULL)
+	{
+		if (tmp[0] == '#')
+			return (1);
+	}
+	if (check == 1)
+	{
+		if (step == 3)
+			return (3);
+		else
+			return (-1);
+	}
+	if (tmp != NULL && step == 0)//on veut les fourmis
+	{
+		while (tmp[i] != '\0')
+		{
+			if (ft_isdigit(tmp[i]) == 0)
+			{
+				step = 0;
+				return (0);
+			}
+			i++;
+		}
+		step = 1;
+		return (step);
+	}
+	if (tmp != NULL && (step == 1 || step == 2))//on veut les salles
+	{
+		if (ft_at_least_one_room(tmp) == 1)
+		{
+			while (namelist->next != NULL)
+				namelist = namelist->next;
+			namelist->next = ft_new_name(tmp, namelist);
+			namelist = namelist->next;
+			printf("namelist->name = %s\n", namelist->name);
+			if (ft_already(namelist->name, namelistart) == 1)
+			{
+				printf("blabla\n");
+				return (0);
+			}
+			//si le nouveau existait deja : return 0
+			step = 2;
+			return (step);
+		}
+	}
+
+	if (tmp != NULL && (step == 2 || step == 3))//on veut les tubes
+	{
+		while (tmp[i])
+		{
+			if (tmp[i] == '-')
+				tunnel++;
+			i++;
+		}
+		if (tunnel > 1)
+			return (0);
+		if (tunnel == 1)
+		{
+			//namelist = namelist->next;
+			while (namelist != NULL)
+			{
+				if (ft_not_yet(tmp, namelistart) == 1)
+				{
+					return (0);
+				}
+				namelist = namelist->next;
+			}
+		}
+		step = 3;
+		return (step);
+	}
+//	printf("step = %d\n", step);
+	return (step);
+}
+
+int		main(int argc, char **argv)
 {
 	char		*tmp;
 	t_filist	*filist;
@@ -1336,21 +1562,45 @@ int		main(void)
 	t_roomlist	*roomlistart;
 	t_listlist	*listlist;
 	t_listlist	*listlistart;
+	t_namelist	*namelist;
+	t_namelist	*namelistart;
 	int			way;
 
+	if (argc != 1)
+	{
+		printf("ERROR\n");
+		return (0);
+	}
 	filist = (t_filist*)malloc(sizeof(t_filist));
 	filist->previous = NULL;
 	filist->line = NULL;
 	filist->next = NULL;
 	filistart = filist;
 	way = 1;
+	namelist = (t_namelist*)malloc(sizeof(t_namelist));
+	namelist->name = NULL;
+	namelist->previous = NULL;
+	namelist->next = NULL;
+	namelistart = namelist;
 	while (get_next_line(0, &tmp))
 	{
+	//	printf("tmp = %s\n", tmp);
+		if (ft_valid_line(tmp, 0, namelistart) == 0)
+		{
+			printf("Coucou !\n");
+			break ;
+		}
 		filist->next = ft_filstnew(tmp, filist);
 		filist = filist->next;
 		free(tmp);
 	}
 	free(tmp);
+	if (ft_valid_line(NULL, 1, NULL) != 3)
+	{
+		printf("ERROR\n");
+		//////////////penser a free filist ici
+		return (0);
+	}
 	roomlist = (t_roomlist*)malloc(sizeof(t_roomlist));
 	roomlist->previous = NULL;
 	roomlist->place = 0;
@@ -1378,7 +1628,8 @@ int		main(void)
 	listlistart = listlist;	
 	listlist = listlistart;
 	ft_show_listlist(listlist);
-	//show_moov_ants(listlist);
+	//ft_show_listlist(listlist);
+	//show_moov_ants(listlist);*/
 	ft_free(filistart, roomlist,listlist);
 	return (0);
 }
