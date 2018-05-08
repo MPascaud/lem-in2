@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/08 17:00:47 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/08 19:38:29 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -962,7 +962,7 @@ int		ft_reverse(t_roomlist *roomlist, int way)
 
 	roomlistart = roomlist;
 	roomlist = roomlist->next;
-	//	maxplace = 0;
+	maxplace = 0;//<<<<<<<<<<<<<----------------
 	while (roomlist != NULL)
 	{
 		if (roomlist->place == -2)
@@ -974,7 +974,7 @@ int		ft_reverse(t_roomlist *roomlist, int way)
 		}
 		roomlist = roomlist->next;
 	}
-	//	printf("maxplace = %d\n", maxplace);
+	//printf("maxplace = %d\n", maxplace);
 	if (maxplace == 0)
 		return (0);
 	roomlist = roomlistart;
@@ -1033,6 +1033,10 @@ int		ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, int
 	{
 		while (roomlist != NULL)
 		{
+			/*if (roomlist->place == -2 && ft_search_previous(roomlist, roomlistart, way) == 1000)
+			{
+
+			}*/
 			if (roomlist->way == 0 && roomlist->place != 0 && roomlist->taken == 0 && ft_search_previous(roomlist, roomlistart, way) == 1)
 			{
 				//		printf("COUCOU1111111111\n");
@@ -1073,7 +1077,7 @@ int		ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, int
 		{
 			//	printf("blop\n");
 			roomlist = roomlistart;
-			//		ft_show_roomlist(roomlist);
+			ft_show_roomlist(roomlist);
 			roomlist = roomlist->next;
 		}
 		else
@@ -1711,6 +1715,52 @@ void	ft_show_filist(t_filist *filistart)
 	}
 }
 
+/*int		ft_search_next(t_roomlist *roomlist, t_roomlist *roomlistart, int way)
+{
+	roomlistart = roomlistart->next;
+	while (roomlistart != NULL)
+	{
+		if ((roomlistart->place == roomlist->place + 1 || roomlistart->place == -2)
+				&& roomlistart->taken == 0
+				&& (roomlistart->way == 0 || roomlistart->way == way)
+				&& check_connection(roomlistart, roomlist) == 1)
+		{
+			return (1);
+		}
+
+		roomlistart = roomlistart->next;
+	}
+	return (0);
+}*/
+
+int		ft_start_to_end(t_filist *filistart, t_roomlist *roomlist, t_roomlist *roomlistart, int way)
+{
+	t_roomlist	*start;
+	t_roomlist	*end;
+
+	start = roomlistart->next;
+	end = roomlistart->next;
+	while (start != NULL)
+	{
+		if (start->place == 0)
+		{
+			while (end != NULL)
+			{
+				if (end->place == -2 && check_connection(start, end) == 1)
+				{
+					printf("BLABLABLOP\n");
+					start->way = 1;
+					end->way = 1;
+					return (1);
+				}
+				end = end->next;
+			}
+		}
+		start = start->next;
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
 	char		*tmp;
@@ -1740,8 +1790,14 @@ int		main(int argc, char **argv)
 	namelist->previous = NULL;
 	namelist->next = NULL;
 	namelistart = namelist;
+	tmp = NULL;
 	while (get_next_line(0, &tmp))
 	{
+		//printf("tmp = %s\n", tmp);
+		//if (tmp == '\0')
+		//{
+		//	return (0);
+		//}
 	//	printf("tmp = %s\n", tmp);
 		if (ft_valid_line(tmp, 0, namelistart) == 0)
 		{
@@ -1773,11 +1829,19 @@ int		main(int argc, char **argv)
 	ft_place_end(filistart, roomlist);
 	ft_tunnels(filistart, roomlist);
 	ft_place(filistart, roomlist);
-	while (ft_way(filistart, roomlist, roomlistart, way) == 1)
+	if (ft_start_to_end(filistart, roomlist, roomlistart, way) == 0)
 	{
-		way++;
+		while (ft_way(filistart, roomlist, roomlistart, way) == 1)
+		{
+			way++;
+		}
+		way--;
 	}
-	way--;
+	if (way == 0)
+	{
+		printf("ERROR\n");
+		return (0);
+	}
 	listlist = (t_listlist*)malloc(sizeof(t_listlist));
 	listlist->previous = NULL;
 	listlist->waylist = NULL;
