@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/08 21:19:03 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/08 21:33:42 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1475,6 +1475,7 @@ void    ft_free(t_filist *filistart, t_roomlist *roomlist, t_listlist *listlist,
 		free(listlist);
 		listlist = listlistmp;
 	}
+	free(listlist);
 //	while (1);
 }
 
