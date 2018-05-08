@@ -6,7 +6,7 @@
 #    By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 20:57:47 by mpascaud          #+#    #+#              #
-#    Updated: 2018/04/30 19:59:59 by mpascaud         ###   ########.fr        #
+#    Updated: 2018/05/08 17:00:22 by mpascaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ $(NAME) :
 	@ gcc $(TAGS) -c $(SRC)
 	@ ar rc $(NAME) $(BIN)
 	@ ranlib $(NAME)
-	@ gcc -o lem-in lem-in.c lem-in.a
+	@ gcc -fsanitize=address -o lem-in lem-in.c lem-in.a
 
 clean:
 	@ rm -rf $(BIN)
