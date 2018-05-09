@@ -6,13 +6,13 @@
 #    By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 20:57:47 by mpascaud          #+#    #+#              #
-#    Updated: 2018/05/08 21:16:07 by mpascaud         ###   ########.fr        #
+#    Updated: 2018/05/08 22:02:14 by mpascaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in.a
 
-TAGS =
+TAGS = -Wall -Werror -Wextra
 
 SRC = get_next_line.c ft_strnew.c ft_strlen.c ft_strncat.c ft_strcpy.c ft_isdigit.c ft_strstr.c ft_strcmp.c ft_atoi.c
 
@@ -24,7 +24,7 @@ $(NAME) :
 	@ gcc $(TAGS) -c $(SRC)
 	@ ar rc $(NAME) $(BIN)
 	@ ranlib $(NAME)
-	@ gcc -o lem-in lem-in.c lem-in.a
+	@ gcc -fsanitize=address -o lem-in lem-in.c lem-in.a
 
 clean:
 	@ rm -rf $(BIN)

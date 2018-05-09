@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/08 21:33:42 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:25:20 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -649,7 +649,7 @@ void	ft_place(t_filist *filist, t_roomlist* roomlist)
 //                que way du suivant = 0;OUPA
 //
 
-int		check_connection(t_roomlist *roomlistart, t_roomlist *roomlist)
+int		ft_check_connection(t_roomlist *roomlistart, t_roomlist *roomlist)
 {
 	int		i;
 
@@ -757,7 +757,7 @@ int		ft_search_previous(t_roomlist *roomlist, t_roomlist *roomlistart, int way)
 		if (roomlistart->place == roomlist->place - 1
 				&& roomlistart->taken == 0 
 				&& roomlistart->way == way
-				&& check_connection(roomlistart, roomlist) == 1)
+				&& ft_check_connection(roomlistart, roomlist) == 1)
 		{
 			//printf("COUCOU\n");
 			return (1);
@@ -769,7 +769,7 @@ int		ft_search_previous(t_roomlist *roomlist, t_roomlist *roomlistart, int way)
 		if (tmp->place == roomlist->place - 1
 				&& tmp->taken == 0
 				&& tmp->way == 0
-				&& check_connection(tmp, roomlist) == 1)
+				&& ft_check_connection(tmp, roomlist) == 1)
 			return (0);
 		tmp = tmp->next;
 	}
@@ -835,7 +835,7 @@ int		ft_search_next(t_roomlist *roomlist, t_roomlist *roomlistart, int way)
 		if ((roomlistart->place == roomlist->place + 1 || roomlistart->place == -2)
 				&& roomlistart->taken == 0
 				&& (roomlistart->way == 0 || roomlistart->way == way)
-				&& check_connection(roomlistart, roomlist) == 1)
+				&& ft_check_connection(roomlistart, roomlist) == 1)
 		{
 			return (1);
 		}
@@ -861,7 +861,7 @@ int		ft_search_first_reverse(t_roomlist *end, t_roomlist *roomlistart, int way)
 		if (roomlist->taken == 0
 				&& roomlist->way == way
 				&& roomlist->place > maxplace 
-				&& check_connection(end, roomlist) == 1)
+				&& ft_check_connection(end, roomlist) == 1)
 			maxplace = roomlist->place;
 		roomlist = roomlist->next;
 	}
@@ -874,7 +874,7 @@ int		ft_search_first_reverse(t_roomlist *end, t_roomlist *roomlistart, int way)
 		if (roomlist->taken == 0
 				&& roomlist->way == way
 				&& (roomlist->place != -1)
-				&& check_connection(end, roomlist) == 1)
+				&& ft_check_connection(end, roomlist) == 1)
 		{
 			if (roomlist->place < maxplace)
 			{
@@ -892,7 +892,7 @@ int		ft_search_first_reverse(t_roomlist *end, t_roomlist *roomlistart, int way)
 		if (roomlist->taken == 0
 				&& roomlist->way == way
 				&& roomlist->place == maxplace
-				&& check_connection(end, roomlist) == 1)
+				&& ft_check_connection(end, roomlist) == 1)
 		{
 			roomlist->taken = 1;
 			break ;
@@ -936,14 +936,14 @@ void	ft_search_other_reverses(t_roomlist *roomlistart, int maxplace, int way)
 	while (roomlist != NULL)
 	{
 		if (roomlist->place == 0
-				&& check_connection(roomlist, roomax) == 1)
+				&& ft_check_connection(roomlist, roomax) == 1)
 		{
 			return ;
 		}
 		if (roomlist->taken == 0
 				&& roomlist->way == way
 				&& roomlist->place == roomax->place - 1
-				&& check_connection(roomlist, roomax) == 1)
+				&& ft_check_connection(roomlist, roomax) == 1)
 		{
 			roomlist->taken = 1;
 			roomax = roomlist;
@@ -1332,7 +1332,7 @@ void	ft_free_only_two(t_filist *filistart, t_namelist *namelist)
 	}
 	free(namelist);
 
-	while (1);
+//	while (1);
 }
 
 void	ft_free_no_listlist(t_filist *filistart, t_roomlist *roomlist, t_namelist *namelist)
@@ -1378,7 +1378,7 @@ void	ft_free_no_listlist(t_filist *filistart, t_roomlist *roomlist, t_namelist *
 	}
 		free(roomlist);
 
-	while (1);
+//	while (1);
 }
 
 
@@ -1813,7 +1813,7 @@ int		ft_start_to_end(t_filist *filistart, t_roomlist *roomlist, t_roomlist *room
 		{
 			while (end != NULL)
 			{
-				if (end->place == -2 && check_connection(start, end) == 1)
+				if (end->place == -2 && ft_check_connection(start, end) == 1)
 				{
 					//printf("BLABLABLOP\n");
 					start->way = 1;
@@ -1918,7 +1918,8 @@ int		main(int argc, char **argv)
 		}
 		way--;
 	}
-	if (way == 0)
+	if (way == 0 || ft_atoi(filistart->next->line) == 0
+			|| ft_atoi(filistart->next->line) < 0)
 	{
 		printf("ERROR\n");
 		ft_free_no_listlist(filistart, roomlist, namelist);
@@ -1933,7 +1934,7 @@ int		main(int argc, char **argv)
 	ft_ants(listlist, filistart);
 	listlistart = listlist;	
 	listlist = listlistart;
-	ft_show_listlist(listlist);
+	//ft_show_listlist(listlist);
 	ft_print_anthill(filistart);
 	//show_moov_ants(listlist);*/
 	ft_free(filistart, roomlist,listlist, namelist);
