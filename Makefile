@@ -6,7 +6,7 @@
 #    By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 20:57:47 by mpascaud          #+#    #+#              #
-#    Updated: 2018/05/08 22:02:14 by mpascaud         ###   ########.fr        #
+#    Updated: 2018/05/10 19:06:05 by mpascaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(NAME) :
 	@ gcc -fsanitize=address -o lem-in lem-in.c lem-in.a
 
 clean:
-	@ rm -rf $(BIN)
+	@ rm -rf $(BIN) lem-in.o
 
 fclean: clean
 	@ rm -rf $(NAME)
