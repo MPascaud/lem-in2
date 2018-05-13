@@ -6,10 +6,9 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 18:13:52 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:58:24 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lem-in.h"
 
@@ -23,7 +22,8 @@ t_listlist	*ft_listlistnew(t_listlist *listlist)
 	return (nextlink);
 }
 
-void	ft_listlist(t_listlist *listlist, t_roomlist *roomlistart, t_roomlist *roomlist, int way)
+void		ft_listlist(t_listlist *listlist, t_roomlist *roomlistart,
+		t_roomlist *roomlist, int way)
 {
 	int		max;
 
@@ -36,10 +36,9 @@ void	ft_listlist(t_listlist *listlist, t_roomlist *roomlistart, t_roomlist *room
 		listlist->waylist = ft_waylist(roomlistart, roomlist, way);
 		way++;
 	}
-
 }
 
-void	ft_first_listlist(t_variables *var)
+void		ft_first_listlist(t_variables *var)
 {
 	var->listlist = (t_listlist*)malloc(sizeof(t_listlist));
 	var->listlist->previous = NULL;

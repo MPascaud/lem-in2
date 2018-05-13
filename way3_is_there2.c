@@ -6,30 +6,28 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 18:08:57 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:45:45 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem-in.h"
 
-
-
-void	ft_length(t_roomlist **roomlist, int way, int *maxplace, t_roomlist *end)
+void	ft_length(t_roomlist **roomlist, int way,
+		int *maxplace, t_roomlist *end)
 {
 	while (*roomlist != NULL)
 	{
 		if ((*roomlist)->taken == 0
 				&& (*roomlist)->way == way
-				&& (*roomlist)->place > *maxplace 
+				&& (*roomlist)->place > *maxplace
 				&& ft_check_connection(end, *roomlist) == 1)
 			*maxplace = (*roomlist)->place;
 		*roomlist = (*roomlist)->next;
 	}
-
 }
 
-void	ft_smallest_biggest(t_roomlist **roomlist, int way, t_roomlist *end, int *maxplace)
+void	ft_smallest_biggest(t_roomlist **roomlist, int way,
+		t_roomlist *end, int *maxplace)
 {
 	while (*roomlist != NULL)
 	{
@@ -41,10 +39,10 @@ void	ft_smallest_biggest(t_roomlist **roomlist, int way, t_roomlist *end, int *m
 			*maxplace = (*roomlist)->place;
 		*roomlist = (*roomlist)->next;
 	}
-
 }
 
-void	ft_room_max(t_roomlist *roomlist, t_roomlist **roomax, int maxplace, int way)
+void	ft_room_max(t_roomlist *roomlist, t_roomlist **roomax,
+		int maxplace, int way)
 {
 	while (roomlist != NULL)
 	{
@@ -57,17 +55,15 @@ void	ft_room_max(t_roomlist *roomlist, t_roomlist **roomax, int maxplace, int wa
 		}
 		roomlist = roomlist->next;
 	}
-
 }
-
 
 void	ft_search_other_reverses(t_roomlist *roomlistart, int maxplace, int way)
 {
 	t_roomlist	*roomlist;
 	t_roomlist	*roomax;
+
 	roomlist = roomlistart;
 	roomlist = roomlist->next;
-
 	ft_room_max(roomlist, &roomax, maxplace, way);
 	roomlist = roomlistart;
 	roomlist = roomlist->next;

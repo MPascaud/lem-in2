@@ -6,10 +6,9 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 17:52:34 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:50:33 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lem-in.h"
 
@@ -19,11 +18,9 @@ void	ft_roomlist_to_first(t_roomlist **roomlist, t_roomlist *roomlistart)
 	*roomlist = (*roomlist)->next;
 }
 
-
 int		ft_no_zero(t_roomlist *roomlistart)
 {
 	roomlistart = roomlistart->next;
-
 	while (roomlistart != NULL)
 	{
 		if (roomlistart->way == 0 && roomlistart->place != -1)
@@ -32,12 +29,11 @@ int		ft_no_zero(t_roomlist *roomlistart)
 		}
 		roomlistart = roomlistart->next;
 	}
-
-
 	return (1);
 }
 
-int		ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, int way)
+int		ft_way(t_filist *filist, t_roomlist *roomlist,
+		t_roomlist *roomlistart, int way)
 {
 	int		progress;
 

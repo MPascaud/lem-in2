@@ -6,10 +6,9 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 18:22:06 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:55:42 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lem-in.h"
 
@@ -23,7 +22,8 @@ t_waylist	*ft_waylistnew(t_waylist *waylist)
 	return (nextlink);
 }
 
-void		ft_build_waylist(t_roomlist *roomlist, t_waylist **waylist, int way, t_roomlist *roomlistart)
+void		ft_build_waylist(t_roomlist *roomlist, t_waylist **waylist,
+		int way, t_roomlist *roomlistart)
 {
 	int		place;
 	char	*str;
@@ -32,7 +32,8 @@ void		ft_build_waylist(t_roomlist *roomlist, t_waylist **waylist, int way, t_roo
 	roomlist = roomlist->next;
 	while (roomlist != NULL)
 	{
-		if ((roomlist->place == 0 || roomlist->way == way) && roomlist->place == place)
+		if ((roomlist->place == 0 || roomlist->way == way)
+				&& roomlist->place == place)
 		{
 			(*waylist)->next = ft_waylistnew(*waylist);
 			*waylist = (*waylist)->next;
@@ -40,7 +41,7 @@ void		ft_build_waylist(t_roomlist *roomlist, t_waylist **waylist, int way, t_roo
 			(*waylist)->way = roomlist->way;
 			if ((*waylist)->place == 0)
 				(*waylist)->way = way;
-			str = ft_strnew(ft_strlen(roomlist->name));//<<<<<<<<???????????????????????????
+			str = ft_strnew(ft_strlen(roomlist->name));
 			(*waylist)->name = ft_strcpy(str, roomlist->name);
 			place++;
 			roomlist = roomlistart;
@@ -56,16 +57,14 @@ void		ft_waylist_first(t_waylist *waylist, int way)
 	waylist->place = -1;
 	waylist->previous = NULL;
 	waylist->next = NULL;
-
 }
-
 
 t_waylist	*ft_waylist(t_roomlist *roomlistart, t_roomlist *roomlist, int way)
 {
 	t_waylist	*waylist;
 	t_waylist	*waylistart;
-	char	*str;
-	
+	char		*str;
+
 	waylist = (t_waylist*)malloc(sizeof(t_waylist));
 	ft_waylist_first(waylist, way);
 	waylistart = waylist;
@@ -87,4 +86,3 @@ t_waylist	*ft_waylist(t_roomlist *roomlistart, t_roomlist *roomlist, int way)
 	}
 	return (waylistart);
 }
-

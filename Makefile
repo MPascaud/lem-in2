@@ -6,7 +6,7 @@
 #    By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/10 20:57:47 by mpascaud          #+#    #+#              #
-#    Updated: 2018/05/13 18:27:13 by mpascaud         ###   ########.fr        #
+#    Updated: 2018/05/13 20:34:00 by mpascaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ TAGS = -Wall -Werror -Wextra
 
 SRC = get_next_line.c ft_strnew.c ft_strlen.c ft_strncat.c ft_strcpy.c ft_isdigit.c ft_strstr.c ft_strcmp.c ft_atoi.c \
 	  gnl.c gnl_auxis.c \
-	  build1.c build2_name.c build3_place_start_end.c build4_tunnels.c build4_tunnels2.c build5_place.c \
+	  build1.c build2_name.c build3_place_start_end.c build4_tunnels1.c build4_tunnels2.c build5_place.c \
 	  possible_to_way.c way1.c way2.c way3_is_there1.c way3_is_there2.c \
 	  listlist.c listlist_waylist.c \
-	  free.c free_auxis.c
+	  free.c free_auxis.c gnl_step_two.c gnl_step_three.c
 
 BIN = $(SRC:.c=.o)
 
@@ -29,7 +29,7 @@ $(NAME) :
 	@ gcc $(TAGS) -c $(SRC)
 	@ ar rc $(NAME) $(BIN)
 	@ ranlib $(NAME)
-	@ gcc -fsanitize=address -o lem-in lem-in.c lem-in.a
+	@ gcc -fsanitize=address -o lem-in lem_in.c lem-in.a
 
 clean:
 	@ rm -rf $(BIN) lem-in.o

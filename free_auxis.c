@@ -6,13 +6,11 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 18:29:23 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:17:06 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem-in.h"
-
 
 void	ft_free_beftunnels(t_roomlist *roomlist)
 {
@@ -29,8 +27,6 @@ void	ft_free_beftunnels(t_roomlist *roomlist)
 		free((roomlist->beftunnels)[i]);
 		free(roomlist->beftunnels);
 	}
-
-
 }
 
 void	ft_free_tunnels(t_roomlist *roomlist)
@@ -50,8 +46,8 @@ void	ft_free_tunnels(t_roomlist *roomlist)
 	}
 }
 
-
-void	ft_free_filist_namelist(t_filist *filistart, t_namelist *namelist, t_filist *tmp, t_namelist *namelistmp)
+void	ft_free_filist_namelist(t_filist *filistart, t_namelist *namelist,
+		t_filist *tmp, t_namelist *namelistmp)
 {
 	while (tmp != NULL)
 	{
@@ -61,8 +57,6 @@ void	ft_free_filist_namelist(t_filist *filistart, t_namelist *namelist, t_filist
 		filistart = tmp;
 	}
 	free(tmp);
-
-		
 	while (namelist != NULL)
 	{
 		namelistmp = namelist->next;
@@ -71,16 +65,13 @@ void	ft_free_filist_namelist(t_filist *filistart, t_namelist *namelist, t_filist
 		namelist = namelistmp;
 	}
 	free(namelist);
-
 }
 
 void	ft_free_roomlist(t_roomlist *roomlistmp, t_roomlist *roomlist)
 {
-
 	roomlistmp = roomlist->next;
 	free(roomlist);
 	roomlist = roomlistmp;
-
 	while (roomlist != NULL)
 	{
 		free(roomlist->name);
@@ -90,14 +81,12 @@ void	ft_free_roomlist(t_roomlist *roomlistmp, t_roomlist *roomlist)
 		free(roomlist);
 		roomlist = roomlistmp;
 	}
-		free(roomlist);
-
+	free(roomlist);
 }
 
-void	ft_free_listlist(t_listlist *listlistmp, t_listlist *listlist, t_waylist *waylistmp)
+void	ft_free_listlist(t_listlist *listlistmp, t_listlist *listlist,
+		t_waylist *waylistmp)
 {
-
-
 	listlistmp = listlist;
 	while (listlistmp != NULL)
 	{
@@ -112,7 +101,5 @@ void	ft_free_listlist(t_listlist *listlistmp, t_listlist *listlist, t_waylist *w
 		free(listlist);
 		listlist = listlistmp;
 	}
-
 	free(listlist);
-
 }

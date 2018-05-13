@@ -6,10 +6,9 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 17:20:45 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:39:56 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lem-in.h"
 
@@ -25,7 +24,7 @@ t_roomlist	*ft_roomlstnew(t_roomlist *roomlist)
 	return (nextlink);
 }
 
-int		ft_this_is_new_room(t_filist *filist)
+int			ft_this_is_new_room(t_filist *filist)
 {
 	int		result;
 	int		i;
@@ -36,7 +35,6 @@ int		ft_this_is_new_room(t_filist *filist)
 		return (0);
 	while ((filist->line)[i] != '\0')
 	{
-
 		i++;
 	}
 	i--;
@@ -53,9 +51,8 @@ int		ft_this_is_new_room(t_filist *filist)
 	return (0);
 }
 
-void	ft_cpyname(t_filist *filist, t_roomlist *roomlist)
+void		ft_cpyname(t_filist *filist, t_roomlist *roomlist)
 {
-	//char	*str;
 	int		i;
 	int		j;
 
@@ -76,10 +73,9 @@ void	ft_cpyname(t_filist *filist, t_roomlist *roomlist)
 		(roomlist->name)[j] = (filist->line)[j];
 		j++;
 	}
-
 }
 
-void	ft_name(t_filist *filist, t_roomlist *roomlist)
+void		ft_name(t_filist *filist, t_roomlist *roomlist)
 {
 	filist = filist->next;
 	while (filist != NULL)

@@ -6,13 +6,27 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 17:06:46 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:13:34 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem-in.h"
-int		ft_at_least_one_room(char *tmp)
+
+t_filist	*ft_filstnew(char *tmp, t_filist *link)
+{
+	t_filist	*nextlink;
+	char		*str;
+
+	if (!(nextlink = (t_filist*)malloc(sizeof(t_filist))))
+		return (NULL);
+	nextlink->previous = link;
+	str = ft_strnew(ft_strlen(tmp));
+	nextlink->line = ft_strcpy(str, tmp);
+	nextlink->next = NULL;
+	return (nextlink);
+}
+
+int			ft_at_least_one_room(char *tmp)
 {
 	int		i;
 
@@ -40,7 +54,7 @@ int		ft_at_least_one_room(char *tmp)
 	return (0);
 }
 
-int		ft_bad_room(char *tmp, int step, int i)
+int			ft_bad_room(char *tmp, int step, int i)
 {
 	if (tmp[0] == '#')
 		return (0);

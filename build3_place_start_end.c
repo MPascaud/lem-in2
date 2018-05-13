@@ -6,13 +6,11 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 17:25:33 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:38:39 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "lem-in.h"
-
 
 int		ft_disizit(t_filist *filist, t_roomlist *roomlist)
 {
@@ -31,7 +29,6 @@ int		ft_disizit(t_filist *filist, t_roomlist *roomlist)
 		return (0);
 	return (1);
 }
-
 
 void	ft_place_start(t_filist *filist, t_roomlist *roomlist)
 {
@@ -54,11 +51,9 @@ void	ft_place_start(t_filist *filist, t_roomlist *roomlist)
 				}
 				roomlist = roomlist->next;
 			}
-
 		}
 		filist = filist->next;
 	}
-
 }
 
 void	ft_place_end(t_filist *filist, t_roomlist *roomlist)

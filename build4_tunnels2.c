@@ -6,10 +6,9 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:29:32 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 17:36:29 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:32:03 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "lem-in.h"
 
@@ -20,7 +19,6 @@ int		ft_disiz_tunnel(t_filist *filist, t_roomlist *roomlist)
 
 	there_is_tunnel = 0;
 	i = 0;
-
 	while ((filist->line)[i] != '\0')
 	{
 		if ((filist->line)[i] == '-')
@@ -29,11 +27,11 @@ int		ft_disiz_tunnel(t_filist *filist, t_roomlist *roomlist)
 	}
 	if (there_is_tunnel == 0)
 		return (0);
-
 	i = 0;
 	while ((roomlist->name)[i] != '\0')
 	{
-		if ((filist->line)[i] != (roomlist->name)[i] || (filist->line)[i] == '\0')
+		if ((filist->line)[i] != (roomlist->name)[i]
+				|| (filist->line)[i] == '\0')
 			return (0);
 		i++;
 	}
@@ -42,7 +40,7 @@ int		ft_disiz_tunnel(t_filist *filist, t_roomlist *roomlist)
 	return (1);
 }
 
-int		ft_disiz_beftunnel(t_filist *filist, t_roomlist *roomlist)
+int		ft_disiz_beftunnel(t_filist *filist, t_roomlist *rmlst)
 {
 	int		there_is_tunnel;
 	int		i;
@@ -60,9 +58,9 @@ int		ft_disiz_beftunnel(t_filist *filist, t_roomlist *roomlist)
 		}
 	if (there_is_tunnel == 0)
 		return (0);
-	while ((roomlist->name)[++j] != '\0')
+	while ((rmlst->name)[++j] != '\0')
 	{
-		if ((filist->line)[i] != (roomlist->name)[j] || (filist->line)[i] == '\0')
+		if ((filist->line)[i] != (rmlst->name)[j] || (filist->line)[i] == '\0')
 			return (0);
 		i++;
 	}
@@ -120,4 +118,3 @@ char	*ft_beflink(t_filist *filist)
 	tunname[i] = '\0';
 	return (tunname);
 }
-

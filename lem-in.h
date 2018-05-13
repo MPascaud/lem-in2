@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:44:23 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/13 18:18:26 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:37:36 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,11 @@ int     ft_search_first_reverse(t_roomlist *end, t_roomlist *roomlistart, int wa
 int     ft_search_next(t_roomlist *roomlist, t_roomlist *roomlistart, int way);
 void    ft_search_other_reverses(t_roomlist *roomlistart, int maxplace, int way);
 int     ft_search_previous(t_roomlist *roomlist, t_roomlist *roomlistart, int way);
-void    ft_show_roomlist(t_roomlist *roomlist);
 void    ft_smallest_biggest(t_roomlist **roomlist, int way, t_roomlist *end, int *maxplace);
 int     ft_start_to_end(t_roomlist *roomlistart);
 int     ft_step_one(char *tmp, int i, int *step);
 int     ft_step_three(char *tmp, int *step, t_namelist *namelistart);
 int     ft_step_two(char *tmp, int *step, t_namelist *namelist, t_namelist *namelistart);
-void    ft_takens_to_one(t_roomlist *roomlistart, int way);
 int     ft_this_is_new_room(t_filist *filist);
 void    ft_tunnels(t_filist *filist, t_roomlist *roomlist);
 int     ft_valid_line(char *tmp, int check, t_namelist *namelistart);
@@ -173,8 +171,6 @@ int     ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, 
 t_waylist   *ft_waylist(t_roomlist *roomlistart, t_roomlist *roomlist, int way);
 t_waylist   *ft_waylistnew(t_waylist *waylist);
 void        ft_waylist_first(t_waylist *waylist, int way);
-void    ft_ways_to_zero(t_roomlist *roomlistart);
-void    ft_which_max_and_losts_to_zero(t_roomlist *roomlist, int *max);
 
 
 
