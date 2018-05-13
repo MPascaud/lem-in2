@@ -6,7 +6,7 @@
 /*   By: mpascaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 20:44:23 by mpascaud          #+#    #+#             */
-/*   Updated: 2018/05/11 18:31:12 by mpascaud         ###   ########.fr       */
+/*   Updated: 2018/05/13 18:18:26 by mpascaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int     ft_already(char *name, t_namelist *namelistart);
 void    ft_ants(t_listlist *listlist, t_filist *filistart);
 int     ft_at_least_one_room(char *tmp);
 int     ft_bad_room(char *tmp, int step, int i);
-char    *ft_beflink(t_filist *filist, t_roomlist *roomlist);
+char    *ft_beflink(t_filist *filist);
 void    ft_build(t_variables *var);
 void        ft_build_waylist(t_roomlist *roomlist, t_waylist **waylist, int way, t_roomlist *roomlistart);
 int     ft_check_connection(t_roomlist *roomlistart, t_roomlist *roomlist);
@@ -129,11 +129,11 @@ void    ft_gnl(t_variables *var);
 void    ft_init(t_roomlist *roomlist);
 int     ft_is_there_a_way(t_roomlist *roomlistart, int way);
 void    ft_length(t_roomlist **roomlist, int way, int *maxplace, t_roomlist *end);
-char    *ft_link(t_filist *filist, t_roomlist *roomlist);
+char    *ft_link(t_filist *filist);
 void    ft_link_beftunnels(int *i, t_roomlist *roomlist, t_filist *filist, t_filist *filistart);
 void    ft_link_tunnels(int *i, t_roomlist *roomlist, t_filist *filist, t_filist *filistart);
 void    ft_listlist(t_listlist *listlist, t_roomlist *roomlistart, t_roomlist *roomlist, int way);
-t_listlist  *ft_listlistnew(t_listlist *listlist, int way);
+t_listlist  *ft_listlistnew(t_listlist *listlist);
 void    ft_malloc_beftunnels(t_roomlist *roomlist, t_filist *filist, t_roomlist *roomlistart, t_filist *filistart);
 void    ft_malloc_tunnels(t_roomlist *roomlist, t_filist *filist, int *tunnbr, t_filist *filistart);
 void    ft_name(t_filist *filist, t_roomlist *roomlist);
@@ -161,7 +161,7 @@ void    ft_search_other_reverses(t_roomlist *roomlistart, int maxplace, int way)
 int     ft_search_previous(t_roomlist *roomlist, t_roomlist *roomlistart, int way);
 void    ft_show_roomlist(t_roomlist *roomlist);
 void    ft_smallest_biggest(t_roomlist **roomlist, int way, t_roomlist *end, int *maxplace);
-int     ft_start_to_end(t_filist *filistart, t_roomlist *roomlist, t_roomlist *roomlistart, int way);
+int     ft_start_to_end(t_roomlist *roomlistart);
 int     ft_step_one(char *tmp, int i, int *step);
 int     ft_step_three(char *tmp, int *step, t_namelist *namelistart);
 int     ft_step_two(char *tmp, int *step, t_namelist *namelist, t_namelist *namelistart);
@@ -171,7 +171,7 @@ void    ft_tunnels(t_filist *filist, t_roomlist *roomlist);
 int     ft_valid_line(char *tmp, int check, t_namelist *namelistart);
 int     ft_way(t_filist *filist, t_roomlist *roomlist, t_roomlist *roomlistart, int way);
 t_waylist   *ft_waylist(t_roomlist *roomlistart, t_roomlist *roomlist, int way);
-t_waylist   *ft_waylistnew(t_roomlist *roomlist, int way, t_waylist *waylist);
+t_waylist   *ft_waylistnew(t_waylist *waylist);
 void        ft_waylist_first(t_waylist *waylist, int way);
 void    ft_ways_to_zero(t_roomlist *roomlistart);
 void    ft_which_max_and_losts_to_zero(t_roomlist *roomlist, int *max);
